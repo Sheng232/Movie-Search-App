@@ -1,0 +1,56 @@
+@mixin flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchForm{
+    width: 100%;
+    gap: 10px;
+    padding: 1rem 0;
+    @include flex-center;
+
+   input{
+    max-width: 400px;
+    width: 100%;
+    height: 30px;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    padding: 10px;
+   }
+
+   button{
+    background: lightskyblue;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+   }
+}
+
+.appTitle{
+    text-align: center;
+    width: 100%;
+    padding-top: 1rem;
+}
+
+.movieContainer{
+    padding: 1rem;
+    width: 210px;
+    height: 430px;
+    @include flex-center;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: end;
+
+    h2{
+        font-size: 0.8rem;
+    }
+}
+
+.movieData{
+    @include flex-center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
