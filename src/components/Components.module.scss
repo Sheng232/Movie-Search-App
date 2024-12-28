@@ -35,14 +35,12 @@ $LikeHoverColor: rgb(255, 231, 235);
     border-radius: 100%;
   }
   50% {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px $LikebuttonColor, 0 0 30px $LikebuttonColor;
+    transform: scale(1.2);
     opacity: 0.7;
     border-radius: 100%;
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0px $LikebuttonColor;
     opacity: 1;
     border-radius: 100%;
   }
