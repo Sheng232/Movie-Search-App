@@ -1,5 +1,4 @@
 $LikebuttonColor: #a6423a;
-$LikeHoverColor: rgb(255, 231, 235);
 
 @mixin flex-center {
   display: flex;
@@ -18,7 +17,6 @@ $LikeHoverColor: rgb(255, 231, 235);
   z-index: 2;
 
   &:hover {
-    background-color: $LikeHoverColor;
     border-radius: 100%;
   }
 
