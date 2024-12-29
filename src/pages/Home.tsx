@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import appStyle from "../App.module.scss";
+import appStyle from "./Home.module.scss";
 import LikeButton from "../components/LikeButton";
 import { Link } from "react-router-dom";
 
 function App() {
+  //api_key  = 7c6359fb38405964278bde77066e6096
 
   type Movies = Movie[]
 
@@ -18,16 +19,36 @@ function App() {
     popularity: number;
     poster_path: string | null;
     release_date: string;
-    title: string;
+    name?: string;
+    title?: string;
     video: boolean;
     vote_average: number;
     vote_count: number;
+    first_air_date?: string;
   }
 
 
   const [movieData, setMovieData] = useState<Movies>(
     JSON.parse(localStorage.getItem("movies") || "[]")
   );
+
+  useEffect(()=>{
+    const fetchTrendingMovies = async() =>{
+        try{
+            if(movieData.length === 0){
+              const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=7c6359fb38405964278bde77066e6096`);
+              const data = await res.json();
+              setMovieData(data.results);
+            }
+            
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+    fetchTrendingMovies();
+}, [])
+
   const [movieQuery, setMovieQuery] = useState<string>("");
 
   function fetchMovie(event: { preventDefault: () => void }) {
@@ -35,7 +56,7 @@ function App() {
     const fetchData = async (query: string) => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=ae21a1dbba5bee442174e3d4e60fb1df&language=en-US&query=${query}&page=1&include_adult=false`
+          `https://api.themoviedb.org/3/search/movie?api_key=7c6359fb38405964278bde77066e6096&language=en-US&query=${query}&page=1&include_adult=false`
         );
         const data = await res.json();
         setMovieData(data.results);
@@ -58,14 +79,14 @@ function App() {
   }
 
   const displayMovies = movieData.map((movie: Movie, index: number) => {
-    const { title, poster_path, release_date } = movie;
+    const { id, title, poster_path, release_date, name, first_air_date} = movie;
     return (
       poster_path && (
         <div key={index} className={appStyle.movieContainer}>
           <LikeButton />
-          <Link to={title}>
-            <h2>{title}</h2>
-            <p>{release_date}</p>
+          <Link to={`${id}`}>
+            <h2>{title ? title : name}</h2>
+            <p>{release_date ? release_date : first_air_date}</p>
             <img
               src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${poster_path}`}
               alt=""
