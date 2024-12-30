@@ -1,7 +1,8 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams} from "react-router-dom"
 import {useState, useEffect} from "react"
 import appStyle from "./Movie.module.scss"
 import LikeButton from "../components/LikeButton";
+import ReturnButton from "../components/ReturnButton";
 
 export default function Movie(){ 
     
@@ -110,7 +111,7 @@ export default function Movie(){
 
     return(
         <>
-            <Link className={appStyle.returnButton} to="/">Return</Link>
+            <ReturnButton />
             <section className={appStyle.movieDetails}>
                 <div className={appStyle.title}>
                     <h1>{title? title : name}</h1> <LikeButton />

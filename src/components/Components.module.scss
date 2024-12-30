@@ -25,6 +25,45 @@ $LikebuttonColor: #a6423a;
   }
 }
 
+.watchListButton{
+  position: fixed;
+  right: 30px;
+  top: 30px;
+  background: white;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  opacity: 0.7;
+  @include flex-center;
+  button{
+    font-size: 50px;
+    cursor: pointer;
+    background: transparent;
+    border-radius: inherit;
+    border: none;
+    color: $LikebuttonColor;
+  }
+  &:hover {
+    animation: rotate 0.1s linear infinite;
+    opacity: 1;
+  }
+}
+
+.returnButton{
+  width: 100px;
+  height: 50px;
+  border: 2px solid lightskyblue;
+  background: lightskyblue;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  color: black;
+  margin: 1rem;
+  @include flex-center;
+  &:active{
+      background: transparent;
+  }
+}
+
 @keyframes pop {
   0% {
     transform: scale(1);
@@ -41,5 +80,25 @@ $LikebuttonColor: #a6423a;
     transform: scale(1);
     opacity: 1;
     border-radius: 100%;
+  }
+}
+
+
+
+@keyframes rotate{
+  0%{
+    transform: rotate(0deg);
+  }
+  25%{
+    transform: rotate(20deg);
+  }
+  50%{
+    transform: rotate(0deg);
+  }
+  75%{
+    transform: rotate(-20deg);
+  }
+  100%{
+    transform: rotate(0deg);
   }
 }
