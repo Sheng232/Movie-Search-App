@@ -106,7 +106,7 @@ export default function Movie(){
         return <h1>Movie not found</h1>;
     }
 
-    const { title, poster_path, overview, popularity, name}  = movieData;
+    const { title, poster_path, overview, popularity, name, id}  = movieData;
     const { homepage } = movieDetails;
 
     return(
@@ -114,9 +114,10 @@ export default function Movie(){
             <ReturnButton />
             <section className={appStyle.movieDetails}>
                 <div className={appStyle.title}>
-                    <h1>{title? title : name}</h1> <LikeButton />
+                    <h1>{title? title : name}</h1>
+                    <LikeButton id={id}/>
                 </div>
-                <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${poster_path}`} alt={title} />
+                <img src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt={title} />
                 <p>{overview}</p>
                 <p><strong>Popularity: </strong>{popularity}</p>
                 {movieDetails && <a href={homepage} target="_blank">Link to the movie page: {homepage}</a>}

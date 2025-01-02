@@ -32,13 +32,15 @@ function App() {
   const [movieData, setMovieData] = useState<Movies>(
     JSON.parse(localStorage.getItem("movies") || "[]")
   );
+  //The query state is updated when the user types in the search bar
+  const [movieQuery, setMovieQuery] = useState<string>("");
 
   //Fetch trending movies
   useEffect(()=>{
     const fetchTrendingMovies = async() =>{
         try{
             if(movieData.length === 0){
-              const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=7c6359fb38405964278bde77066e6096`);
+              const res = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=7c6359fb38405964278bde77066e6096`);
               const data = await res.json();
               setMovieData(data.results);
             }
@@ -50,9 +52,6 @@ function App() {
     }
     fetchTrendingMovies();
 }, [movieData]);
-
-  //The query state is updated when the user types in the search bar
-  const [movieQuery, setMovieQuery] = useState<string>("");
 
   //Fetch movie data based on the query
   function fetchMovie(event: { preventDefault: () => void }) {
@@ -68,6 +67,7 @@ function App() {
         console.log(error);
       }
     };
+    setMovieData([]); //this is to ensure that the movieData state is changed so the likeButton also refresh its state
     fetchData(movieQuery);
     setMovieQuery("");
   }
@@ -78,6 +78,7 @@ function App() {
     const data = JSON.stringify(movieData);
     JSON.stringify(localStorage.setItem("movies", data));
   }, [movieData])
+
 
   //Update the query state based on the user input
   function updateQueryState(event: React.ChangeEvent<HTMLInputElement>) {
@@ -90,7 +91,7 @@ function App() {
     return (
       poster_path && (
           <div key={index} className={appStyle.movieContainer}>
-              <LikeButton />
+              <LikeButton id={id}/>
               <Link to={`${id}`}>
                 <h2>{title ? title : name}</h2>
                 <p>{release_date ? release_date : first_air_date}</p>
@@ -119,7 +120,6 @@ function App() {
           setMovieData([]);
         }}
         >Trending</button>
-
       </form>
 
       <section className={appStyle.movieData}>

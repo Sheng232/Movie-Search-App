@@ -1,0 +1,28 @@
+@mixin flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watchListTitle{
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+.watchList{
+    flex-direction: column;
+    @include flex-center;
+    gap: 30px;
+    margin-top: 2rem;
+    h2{
+        text-align: center;
+    }
+    .movieCard{
+        @include flex-center;
+        flex-direction: column;
+    }
+
+}
+.movieCard{
+
+}
