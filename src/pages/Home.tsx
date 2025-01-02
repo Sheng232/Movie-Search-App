@@ -67,7 +67,6 @@ function App() {
         console.log(error);
       }
     };
-    setMovieData([]); //this is to ensure that the movieData state is changed so the likeButton also refresh its state
     fetchData(movieQuery);
     setMovieQuery("");
   }
